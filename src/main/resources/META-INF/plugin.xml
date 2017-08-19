@@ -1,0 +1,36 @@
+<idea-plugin>
+    <id>com.github.mqzry.ocaml.plugin</id>
+    <name>OCaml</name>
+    <version>1.0</version>
+
+    <description><![CDATA[
+      Language support for OCaml
+      ]]></description>
+
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="107.105"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <application-components>
+        <!-- Add your application components here -->
+    </application-components>
+
+    <project-components>
+        <!-- Add your project components here -->
+    </project-components>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <fileTypeFactory implementation="com.github.mqzry.ocaml.plugin.OCamlFileTypeFileTypeFactory"/>
+    </extensions>
+</idea-plugin>

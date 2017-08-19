@@ -1,0 +1,62 @@
+buildscript {
+    ext.kotlin_version = kotlinVersion
+    repositories {
+        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+        jcenter()
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'org.jetbrains.intellij' version '0.2.5'
+    id 'org.jetbrains.kotlin.jvm' version '1.1.4'
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    compileKotlin {
+        kotlinOptions {
+            languageVersion = '1.1'
+            apiVersion = '1.0'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+
+    group 'com.github.mqzry'
+    version '1.0-SNAPSHOT'
+
+    apply plugin: 'org.jetbrains.intellij'
+
+    intellij {
+        version ideaVersion
+        pluginName 'intellij-ocaml'
+        updateSinceUntilBuild false
+        publishPlugin {
+            username publishUsername
+            password publishPassword
+        }
+    }
+
+    apply plugin: 'idea'
+    idea {
+        module {
+            generatedSourceDirs += file('src/main/java')
+        }
+    }
+
+    tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+    sourceSets {
+        main {
+            java.srcDirs += 'src/main/java'
+        }
+    }
+}
