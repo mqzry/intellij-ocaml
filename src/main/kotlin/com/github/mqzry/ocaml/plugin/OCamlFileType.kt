@@ -2,8 +2,7 @@ package com.github.mqzry.ocaml.plugin
 
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.vfs.VirtualFile
-import icons.OCamlIcons
-import javax.swing.*;
+import javax.swing.Icon
 
 /**
  * @author mhas
