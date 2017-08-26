@@ -5,48 +5,219 @@
 
   psiClassPrefix="OCaml"
   psiImplClassSuffix="Impl"
-  psiPackage="package com.github.mqzry.ocaml.plugin.psi"
-  psiImplPackage="package com.github.mqzry.ocaml.plugin.psi.impl"
+  psiPackage="com.github.mqzry.ocaml.plugin.psi"
+  psiImplPackage="com.github.mqzry.ocaml.plugin.psi.impl"
 
-  elementTypeHolderClass="package com.github.mqzry.ocaml.plugin.psi.OCamlElementTypes"
-  elementTypeClass="package com.github.mqzry.ocaml.plugin.OCamlElementType"
-  tokenTypeClass="package com.github.mqzry.ocaml.plugin.OCamlTokenType"
+  elementTypeHolderClass="com.github.mqzry.ocaml.plugin.psi.OCamlElementTypes"
+  elementTypeClass="com.github.mqzry.ocaml.plugin.OCamlElementType"
+  tokenTypeClass="com.github.mqzry.ocaml.plugin.OCamlTokenType"
 
   tokens = [
     blank = "regexp:( |\t|\r|\n|\f)+"
     start_comment = "(*"
     end_comment = "*)"
-    id_upper = "regexp:[A-Z_]?[A-Za-z0-9_']*"
-    id_lower = "regexp:[A-Z_]?[A-Za-z0-9_']*"
-    int_dec = "regexp:-?[0-9][0-9_]*"
-    int_oct = "regexp:-?(0x|0X)[0-9A-Fa-f][0-9A-Fa-f_]*"
-    int_hex = "regexp:-?(0o|0O)[0-7][0-7_]*"
-    int_bin = "regexp:-?(0b|0B)[0-1][0-1_]*"
-
-    float_dec = "regexp:-?[0-9][0-9_]*(.[0-9_]*)?([e|E][+|-]?[0-9][0-9_]*)"
-    float_hex = "regexp:-?(0x|0X)[0-9A-Fa-f_][0-9A-Fa-f_]*(.[0-9A-Fa-f_]*)?([p|P][+|-]?[0-9][0-9_]*)"
-
+    string_delim = "\""
     char_delim = "'"
-    string_delim = '"'
+    label_prefix = "~"
 
-    regular_char = 'regexp:[]'
-    escaped_char = "regexp:\\[\\\"'nrtb ]"
+    CHARS_CAPITAL = "regexp:[A-Z]"
+    CHARS_NORMAL = "regexp:[a-z]"
+    DEC_DIGIT="regexp:[0-9]"
+    HEX_DIGIT="regexp:[0-9a-fA-F]"
+    OCT_DIGIT="regexp:[0-7]"
+    FOUR_DIGIT="regexp:[0123]"
+    HEX_DIGIT="regexp:[0-9a-fA-F]"
+    NULL_DIGIT="_"
+    OCT_PREFIX="regexp:(0o)|(0O)"
+    HEX_PREFIX="regexp:(0x)|(0X)"
+    BIN_PREFIX="regexp:(0b)|(0B)"
 
-    ascii_code_dec ="regexp:\\[0-9]{3}"
-    ascii_code_hex ="regexp:\\x[0-9A-Fa-f]{2}"
-    ascii_code_oct ="regexp:\\o[0-3][0-7]{2}"
-    label_prefix = '~'
-    backslash = "regexp:\\"
-    newline = "regexp:\n"
-    tab = "regexp:\t"
-    space = "regexp: "
+    SIGN= "regexp:[\+-]"
+    EXPONENT_CHAR_DEC= "regexp:[eE]"
+    EXPONENT_CHAR_HEX= "regexp:[pP]"
+
+    //All asci chars
+//    TODO: extend to more chars
+    REGULAR_CHAR="regexp:[a-z]"
+    ESCAPED_CHAR="regexp:\\[\\\"\'nrtb ]"
+
+    BACKSLASH='\'
+//    TODO: newline token not recognized in live-preview
+    NEWLINE="regexp:\n|\r|\r\n"
+    SPACE=" "
+    TAB="\t"
+
+    OPERATOR_CHAR="regexp:!∣$∣%∣&∣*∣+∣-∣.∣/∣:∣<∣=∣>∣?∣@∣^∣|∣~"
+    OPERATOR_INFIX_CHAR="regexp:=∣<∣>∣@∣^∣|∣&∣+∣-∣*∣/∣$∣%"
+
+    AND="and"
+    AS="as"
+    ASSERT="assert"
+    ASR="asr"
+    BEGIN="begin"
+    CLASS="class"
+    CONSTRAINT="constraint"
+    DO="do"
+    DONE="done"
+    DOWNTO="downto"
+    ELSE="else"
+    END="end"
+    EXCEPTION="exceptio"
+    EXTERNAL="external"
+    FALSE="false"
+    FOR="for"
+    FUN="fun"
+    FUNCTION="function"
+    FUNCTOR="functor"
+    IF="IF"
+    IN="in"
+    INCLUDE="include"
+    INHERIT="inherit"
+    INITIAL="initial"
+    LAND="land"
+    LAZY="lazy"
+    LET="let"
+    LOR="lor"
+    LSL="lsl"
+    LSR="lsr"
+    LXOR="lxor"
+    MATCH="match"
+    METHOD="method"
+    MOD="mod"
+    MODULE="module"
+    MUTABLE="mutable"
+    NEW="new"
+    NONREC="nonrec"
+    OBJECT="object"
+    OF="of"
+    OPEN="open"
+    OR="or"
+    PRIVATE="private"
+    REC="rec"
+    SIG="sig"
+    STRUCT="struct"
+    THEN="then"
+    TO="to"
+    TRUE="true"
+    TRY="try"
+    TYPE="type"
+    VAL="val"
+    VIRTUAL="virtual"
+    WHEN="when"
+    WHILE="while"
+    WITH="with"
+
+    UEQ="!="
+    HASH="#"
+    AND="&"
+    ANDAND="&&"
+    APOSTROPH="'"
+    OPAR="("
+    CPAR=")"
+    STAR="*"
+    PLUS="+"
+    COMMA=","
+    MINUS="-"
+    MINUSPOINT="-."
+    RARROW="->"
+    POINT="."
+    DPOINT=".."
+    COLON=":"
+    DCOLON="::"
+    COLONEQ=":="
+    GTCOLON=":>"
+    SEMICOLON=";"
+    DSEMICOLON=";;"
+    LQ="<"
+    LARROW="<-"
+    EQ="="
+    GT=">"
+    GTBLOCK=">]"
+    GTBRACKET=">}"
+    Q="?"
+    OBLOCK="["
+    BLOCKLQ="[<"
+    BLOCKGT="[>"
+    BLOCKOR="[|"
+    CBLOCK="]"
+    UNDERSCORE="_"
+    BACKTICK="`"
+    OBRACKET="{"
+    OBRACKETLT="{<"
+    OR="|"
+    ORBLOCK="|]"
+    OROR="||"
+    CBRACKET="}"
+    WIGGLE="~"
+
+//    Camlp4 extensions
+    PARSER="parser"
+    VALUE="value"
+    DOLLAR="$"
+    DDOLLAR="$$"
+    DOLLARCOLON="$:"
+    LTCOLON="<:"
+    LTLT="<<"
+    GTGT=">>"
+    QQ="??"
   ]
 }
 
-char ::= regular_char
-string ::= string_delim (escaped_char|regular_char|(backslash newline (space|tab)*))* string_delim
-identifier ::= id_lower | id_upper
+
+//Identifiers
+ident ::= (letter | "_") ident_base *
+lowercase_ident ::= underscore_letter ident_base *
+uppercase_ident ::= CHARS_CAPITAL ident_base *
+underscore_letter ::= CHARS_NORMAL | "_"
+letter ::= CHARS_CAPITAL | CHARS_NORMAL
+ident_base ::= letter | nulled_dec_digit | "'"
+
+//Numbers
+nulled_dec_digit ::= DEC_DIGIT | NULL_DIGIT
+nulled_hex_digit ::= HEX_DIGIT | NULL_DIGIT
+nulled_oct_digit ::= OCT_DIGIT | NULL_DIGIT
+nulled_bin_digit ::= BIN_DIGIT | NULL_DIGIT
+
+INT_DEC ::= ["-"] {DEC_DIGIT} {NULLED_DEC_DIGIT}*
+INT_OCT ::= ["-"] {OCT_PREFIX} {OCT_DIGIT} {NULLED_OCT_DIGIT}*
+INT_HEX ::= ["-"] {HEX_PREFIX} {HEX_DIGIT} {NULLED_HEX_DIGIT}*
+INT_BIN ::= ["-"] {BIN_PREFIX} {BIN_DIGIT} {NULLED_BIN_DIGIT}*
+
+EXPONENT ::= {SIGN}? {DEC_DIGIT} {NULLED_DEC_DIGIT}*
+FLOAT_DEC ::= ["-"] {DEC_DIGIT} {NULLED_DEC_DIGIT}* ["." {NULLED_DEC_DIGIT}* ] ({EXPONENT_CHAR_DEC} {EXPONENT})?
+FLOAT_HEX ::= ["-"] {HEX_PREFIX} {HEX_DIGIT} {NULLED_HEX_DIGIT}* ("." {HEX_DIGIT}*)? ({EXPONENT_CHAR_HEX} {EXPONENT})
+
+//Chars/Strings
+ASCII_CODE_DEC ::= "\\" DEC_DIGIT DEC_DIGIT DEC_DIGIT
+ASCII_CODE_HEX ::= "\x" FOUR_DIGIT HEX_DIGIT HEX_DIGIT
+ASCII_CODE_OCT ::= "\o" OCT_DIGIT OCT_DIGIT
+char_literal ::= char_delim (REGULAR_CHAR | ESCAPED_CHAR) char_delim
+string_literal ::= string_delim string_char* string_delim
+string_char ::= REGULAR_CHAR | ESCAPED_CHAR | BACKSLASH NEW_LINE (SPACE | TAB)*
 
 
+//Labels
+label ::= label_prefix label_name ":"
+opt_label ::= "?" label_name ":"
+label_name ::= lowercase_ident
 
+//Symbols
+infix_symbol ::= OPERATOR_INFIX_CHAR? OPERATOR_CHAR* | "#" OPERATOR_CHAR+
+prefix_symbol ::= "!" OPERATOR_CHAR* | ("?" | "|") OPERATOR_CHAR+
 
+//Linenumber directives
+linenum_directive ::= "#" DEC_DIGIT+ | "#" DEC_DIGIT+ string_literal
+
+KEYWORDS ::=  AND | AS | ASSERT | ASR | BEGIN | CLASS | CONSTRAINT
+            | DO | DONE | DOWNTO | ELSE | END | EXCEPTION | EXTERNAL
+            | FALSE | FOR | FUN | FUNCTION | FUNCTOR | IF | IN | INCLUDE
+            | INHERIT | INITIAL | LAND | LAZY | LET | LOR | LSL | LSR
+            | LXOR | MATCH | METHOD | MOD | MODULE | MUTABLE | NEW
+            | NONREC | OBJECT | OF | OPEN | OR | PRIVATE | REC | SIG
+            | STRUCT | THEN | TO | TRUE | TRY | TYPE | VAL | VIRTUAL
+            | WHEN | WHILE | WITH | UEQ | HASH | AND | ANDAND | APOSTROPH
+            | OPAR | CPAR | STAR | PLUS | COMMA | MINUS | MINUSPOINT | RARROW
+            | POINT | DPOINT | COLON | DCOLON | COLONEQ | GTCOLON | SEMICOLON
+            | DSEMICOLON | LQ | LARROW | EQ | GT | GTBLOCK | GTBRACKET | Q
+            | OBLOCK | BLOCKLQ | BLOCKGT | BLOCKOR | CBLOCK | UNDERSCORE
+            | BACKTICK | OBRACKET | OBRACKETLT | OR | ORBLOCK | OROR | CBRACKET | WIGGLE
